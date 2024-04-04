@@ -4,8 +4,16 @@ import MeetingTypes from "@/components/MeetingTypes";
 
 const Home = () => {
   const now = moment();
-  const time = now.format("HH:mm");
   const date = now.format("MMMM Do, YYYY");
+  let today = new Date();
+
+  let hours = today.getHours();
+  let minutes = today.getMinutes();
+  let newformat = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  let time = hours + ":" + minutes + " " + newformat;
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
