@@ -3,17 +3,9 @@ import moment from "moment";
 import MeetingTypes from "@/components/MeetingTypes";
 
 const Home = () => {
-  const now = moment();
-  const date = now.format("MMMM Do, YYYY");
-  let today = new Date();
-
-  let hours = today.getHours();
-  let minutes = today.getMinutes();
-  let newformat = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-
-  let time = hours + ":" + minutes + " " + newformat;
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
