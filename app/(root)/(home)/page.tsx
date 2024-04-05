@@ -1,11 +1,26 @@
-import React from "react";
-import moment from "moment";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import moment from "moment-timezone";
 import MeetingTypes from "@/components/MeetingTypes";
 
 const Home = () => {
-  const now = new Date();
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
+  // const now = new Date();
+  // const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  // const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
+
+  const [time, setTime] = useState(moment().tz('Asia/Kolkata').format('LTS'));
+  const [date, setDate] = useState(moment().tz('Asia/Kolkata').format('dddd LL'));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(moment().tz('Asia/Kolkata').format('LTS'));
+      setDate(moment().tz('Asia/Kolkata').format('dddd LL'));
+    }, 1000); // Update every second
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
